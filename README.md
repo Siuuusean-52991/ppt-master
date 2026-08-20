@@ -1,5 +1,8 @@
 # PPT Master — AI generates native PowerPoint from any document
 
+> **Fork note ([Siuuusean-52991](https://github.com/Siuuusean-52991/ppt-master)):** Branch [`feat/ppt-defense`](https://github.com/Siuuusean-52991/ppt-master/tree/feat/ppt-defense) adds overlay skill **PPT Defense** — dual-layer clickable navigation + defense-style `Q:`/`A:` speaker notes for oral exams / interviews. See [`skills/ppt-defense/`](./skills/ppt-defense/). Upstream remains [hugohe3/ppt-master](https://github.com/hugohe3/ppt-master).
+
+
 [![Version](https://img.shields.io/github/v/release/hugohe3/ppt-master?label=version&color=blue)](https://github.com/hugohe3/ppt-master/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub stars](https://img.shields.io/github/stars/hugohe3/ppt-master.svg)](https://github.com/hugohe3/ppt-master/stargazers)
