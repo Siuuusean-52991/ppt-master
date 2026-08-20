@@ -3,54 +3,68 @@
 [English](./README.md) | [中文](./README_CN.md)
 
 > Fork of [hugohe3/ppt-master](https://github.com/hugohe3/ppt-master) (MIT).  
-> Branch [`feat/ppt-defense`](https://github.com/Siuuusean-52991/ppt-master/tree/feat/ppt-defense) adds **PPT Defense** — dual-layer navigation + defense Q&A notes for oral exams / interviews.
+> Branch [`feat/ppt-defense`](https://github.com/Siuuusean-52991/ppt-master/tree/feat/ppt-defense): **PPT Defense = expansion pack** — install **one** Cursor skill to get full ppt-master **plus** dual-nav / defense notes.
 
 ---
 
 ## Foolproof start (copy to your Agent)
 
-### Step 1 — Install the skill
-
-Paste this to Cursor / Claude Code / Codex / any agent:
+### Step 1 — Install **only** PPT Defense
 
 ```text
-Please search GitHub for the skill “PPT Defense” (repo Siuuusean-52991/ppt-master,
-branch feat/ppt-defense), then install it for me:
+Please search GitHub for the skill “PPT Defense”
+(repo Siuuusean-52991/ppt-master, branch feat/ppt-defense) and install it
+as a SINGLE Cursor skill expansion pack:
 
-1) Install / sync the upstream ppt-master skill to ~/.cursor/skills/ppt-master
-   (from this fork’s skills/ppt-master, or from hugohe3/ppt-master).
-2) Install the PPT Defense overlay to ~/.cursor/skills/ppt-defense
-   (from skills/ppt-defense on branch feat/ppt-defense).
-3) Confirm both folders exist and that ppt-master’s attribution_guard still passes.
+Goal layout:
+  ~/.cursor/skills/ppt-defense/
+    SKILL.md
+    ppt-master/     ← nested full upstream engine
+    scripts/ …      ← defense helpers
+
+How:
+1) Sparse-clone or fetch skills/ppt-defense + skills/ppt-master from that branch
+   (or reuse an existing ppt-master copy as --master-src).
+2) Run: ./skills/ppt-defense/install.sh -y
+3) Confirm ~/.cursor/skills/ppt-defense/ppt-master/scripts/attribution_guard.py passes.
+4) Do NOT ask me to install a separate ppt-master skill — it’s already nested.
 ```
 
-### Step 2 — Generate a defense deck
+### Step 2 — Generate
 
-Drop your materials into the chat (PDF / DOCX / Markdown / Feishu links / folder), then paste:
+Drop materials into chat, then:
 
 ```text
-Use the PPT Defense skill to make an interview / oral-defense PPT from the materials I just gave you.
+Use PPT Defense to build a PPT from my materials.
 
-Requirements:
-- Dual-layer top navigation (chapter bar + in-chapter bar) with #slide-N jumps
-- Speaker notes as Q: / A: defense pairs for each page
-- Native editable .pptx export via ppt-master
-- Do not invent unverifiable metrics; mark honest gaps
+I only installed PPT Defense — use its nested ppt-master engine.
+If this is for an interview/defense: add dual-layer #slide-N navigation and
+Q:/A: speaker notes. Export a native editable .pptx.
+Don’t invent unverifiable metrics.
 ```
 
-That’s it. The agent runs ppt-master for generation/export and PPT Defense for nav + notes.
+---
+
+## What “one install” means
+
+| Layer | Location after install | Capabilities |
+|---|---|---|
+| **ppt-master** (engine) | `~/.cursor/skills/ppt-defense/ppt-master/` | Generate / template / fill / enhance → native PPTX |
+| **PPT Defense** (expansion) | `~/.cursor/skills/ppt-defense/` | Dual-layer nav + defense `Q:`/`A:` notes |
+
+Cursor only needs to discover **`ppt-defense`**. See [`skills/ppt-defense/BUNDLE.md`](./skills/ppt-defense/BUNDLE.md).
 
 ---
 
 ## What you get
 
-### From upstream PPT Master (still the engine)
+### From upstream PPT Master (nested engine)
 
 **Editable is table stakes — the real question is how much of PowerPoint you actually get.** PPT Master targets PowerPoint’s native object model in depth: native shapes and connectors with adjustment handles, data-backed charts and tables on demand, and the full text / picture / fill / effect model — click an element and keep editing it as a real PowerPoint object. Through the template / structured route, it can also produce decks with real slide masters and layouts (`p:sldMaster` / `p:sldLayout`).
 
-It is a **workflow skill** inside an agent-capable AI tool: you say “make a deck from this PDF,” it runs on your machine and exports a natively editable `.pptx`. You install Python + an AI agent, then drop in materials — no app coding required.
+It is a **workflow skill** inside an agent-capable AI tool: you say “make a deck from this PDF,” it runs on your machine and exports a natively editable `.pptx`.
 
-Main routes (each with an explicit preserve contract):
+Main routes:
 
 | Route | What it does |
 |---|---|
@@ -59,68 +73,49 @@ Main routes (each with an explicit preserve contract):
 | **Fill Native PPTX** | Fill an existing `.pptx` while preserving design |
 | **Enhance Native PPTX** | Add transitions, animations, narration to a finished deck |
 
-Three practical promises from upstream positioning:
-
-- **Predictable cost** — open source; you only pay for the AI model you use
-- **Data stays local** — aside from model API calls, the pipeline runs on your machine
-- **No platform lock-in** — any agent-capable AI IDE can drive it
+- **Predictable cost** — open source; you only pay for the AI model you use  
+- **Data stays local** — aside from model API calls, the pipeline runs on your machine  
+- **No platform lock-in** — any agent-capable AI IDE can drive it  
 
 > [!IMPORTANT]
 > ### Tool ≠ wishing well
-> `harness + model = agent` — PPT Master / PPT Defense own the workflow; the **model** sets the ceiling. Prefer a strong long-context model for source-heavy decks. Don’t expect a perfect one-shot; the value is removing most of the tedious work so you can polish a **native** deck.
+> `harness + model = agent` — the workflow is ours; the **model** sets the ceiling. Prefer a strong long-context model for source-heavy decks. Don’t expect a perfect one-shot.
 
-Deeper upstream docs (unchanged in this fork): [Why PPT Master](./docs/why-ppt-master.md) · [Getting Started](./docs/getting-started.md) · [PowerPoint ↔ SVG Mapping](./docs/powerpoint-svg-mapping.md)
+Upstream deep docs: [Why PPT Master](./docs/why-ppt-master.md) · [Getting Started](./docs/getting-started.md) · [PowerPoint ↔ SVG Mapping](./docs/powerpoint-svg-mapping.md)
 
-### From PPT Defense (this fork)
+### From PPT Defense (expansion)
 
-| Feature | Why it matters in a defense |
+| Feature | Why it matters |
 |---|---|
-| **Dual-layer nav** | Chapter jump + page jump while answering interruptions |
-| **`nav_map.json`** | Single source of truth for chapters / pages / labels |
-| **Defense notes** | `Q:` / `A:` rebuttal scripts in the PowerPoint notes pane |
-| **Inject / validate scripts** | Refresh nav after page order changes |
-
-Details: [`skills/ppt-defense/`](./skills/ppt-defense/) · policy: [`docs/FORK.md`](./docs/FORK.md)
+| **Dual-layer nav** | Chapter + page jumps during Q&A |
+| **`nav_map.json`** | Single source of truth for structure |
+| **Defense notes** | `Q:` / `A:` rebuttal scripts in Notes pane |
+| **`install.sh`** | One-folder Cursor install |
 
 ---
 
-## Manual install (if your Agent needs a path)
+## Manual install
 
 ```bash
-git clone -b feat/ppt-defense https://github.com/Siuuusean-52991/ppt-master.git
+git clone --filter=blob:none --sparse -b feat/ppt-defense \
+  https://github.com/Siuuusean-52991/ppt-master.git
 cd ppt-master
-python3 -m venv .venv && source .venv/bin/activate   # optional but recommended
-pip install -r requirements.txt
-
-mkdir -p ~/.cursor/skills
-cp -R skills/ppt-master ~/.cursor/skills/ppt-master
-cp -R skills/ppt-defense ~/.cursor/skills/ppt-defense
-
-python3 ~/.cursor/skills/ppt-master/scripts/attribution_guard.py
+git sparse-checkout set skills/ppt-defense skills/ppt-master
+./skills/ppt-defense/install.sh -y
 ```
 
-Prerequisites: Python 3 + [pandoc](https://pandoc.org/) (see upstream [Windows guide](./docs/windows-installation.md) if needed).
+If you already have ppt-master elsewhere:
 
----
-
-## Example Agent prompts (beyond the foolproof pair)
-
-```text
-Use PPT Defense. Build a 16:9 defense deck from ./sources/, ~15–20 pages,
-chapters: 介绍 / 开场 / 项目 / 方法 / 证据 / 收束. Add dual-nav + Q/A notes.
-```
-
-```text
-I already have svg_output/. Only refresh dual-nav from nav_map.json using
-PPT Defense inject_dual_nav.py, then re-export PPTX (另存, don’t overwrite).
+```bash
+./skills/ppt-defense/install.sh -y --master-src /path/to/ppt-master
 ```
 
 ---
 
 ## License & attribution
 
-- License: [MIT](./LICENSE) (same as upstream)
-- Upstream project: [hugohe3/ppt-master](https://github.com/hugohe3/ppt-master)
-- This fork’s additive work: `skills/ppt-defense/`
+- License: [MIT](./LICENSE)
+- Upstream: [hugohe3/ppt-master](https://github.com/hugohe3/ppt-master)
+- Expansion: `skills/ppt-defense/`
 
-Sponsor blocks and maintainer personal bio from the upstream README are omitted here; see upstream if you need them. Placeholder `SPONSORS.md` files remain only so the official skill attribution gate stays intact.
+Sponsor marketing / maintainer personal bio omitted in this fork’s README. Nested `ppt-master/` keeps the files required by `attribution_guard`.
