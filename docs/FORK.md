@@ -29,3 +29,12 @@ Placeholder files such as `SPONSORS.md` / `SPONSORING.md` may still exist so the
 upstream skill attribution bundle remains complete; their body text in this fork
 does **not** promote sponsors. For original sponsor materials, use the upstream
 repo.
+
+## Single-install expansion
+
+`skills/ppt-defense/install.sh` assembles:
+
+`~/.cursor/skills/ppt-defense/` + nested `ppt-master/`.
+
+Users install **PPT Defense only**; they do not need a separate Cursor skill named ppt-master.
+
