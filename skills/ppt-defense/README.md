@@ -37,3 +37,7 @@ python3 skills/ppt-defense/scripts/inject_dual_nav.py /path/to/project
 
 - Base workflow / runtime: © Hugo He — [ppt-master](https://github.com/hugohe3/ppt-master)
 - PPT Defense overlay: additive skill on this fork branch `feat/ppt-defense`
+
+## Docs note
+
+This fork’s root README omits upstream sponsor blocks and maintainer personal bio. See `docs/FORK.md` on branch `feat/ppt-defense`.
