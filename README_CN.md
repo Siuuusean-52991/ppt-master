@@ -1,5 +1,8 @@
 # PPT Master — AI 生成原生 PowerPoint，支持任意文档输入
 
+> **Fork 说明（[Siuuusean-52991](https://github.com/Siuuusean-52991/ppt-master)）：** 分支 [`feat/ppt-defense`](https://github.com/Siuuusean-52991/ppt-master/tree/feat/ppt-defense) 新增叠加 skill **PPT Defense**——双层可点击导航 + 答辩式备注（`Q:` / `A:`），用于面试 / 答辩质询跳转。详见 [`skills/ppt-defense/`](./skills/ppt-defense/)。上游仍为 [hugohe3/ppt-master](https://github.com/hugohe3/ppt-master)。
+
+
 [![Version](https://img.shields.io/github/v/release/hugohe3/ppt-master?label=version&color=blue)](https://github.com/hugohe3/ppt-master/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub stars](https://img.shields.io/github/stars/hugohe3/ppt-master.svg)](https://github.com/hugohe3/ppt-master/stargazers)
