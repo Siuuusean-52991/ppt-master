@@ -1,97 +1,128 @@
 ---
 name: ppt-defense
 description: >
-  Defense / oral-exam / interview presentation workflow on top of ppt-master:
-  dual-layer clickable navigation (chapter bar + in-chapter sub-nav) for rapid
-  jump during Q&A, plus speaker-notes as Q:/A: defense pairs. Use when the user
-  asks for PPT Defense, ppt-defense, dual-nav / 双层导航, 答辩 PPT, 面试翻页跳转,
-  质询跳转, or defense-style speaker notes on a ppt-master deck.
+  Expanded PPT Master + defense overlay in one install. Generates editable PPTX
+  decks (native shapes, charts, templates, fill, enhance) and adds dual-layer
+  clickable navigation plus Q:/A: defense speaker notes for oral exams /
+  interviews. Use when the user mentions PPT Defense, ppt-defense, ppt-master,
+  PowerPoint, PPTX, slide deck, 答辩, 面试翻页, 双层导航, dual-nav, or asks to
+  create / beautify / fill / enhance a presentation — one skill covers both the
+  base pipeline and the defense expansions.
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
+  bundle: "ppt-master + ppt-defense expansion"
   based_on: "ppt-master (https://github.com/hugohe3/ppt-master)"
   license: "MIT"
 ---
 
-# PPT Defense
+# PPT Defense（扩容包）
 
-Overlay skill for **答辩 / 面试 / 质询** decks. Generation, SVG quality, and PPTX
-export still run through **ppt-master**. This skill adds:
+**只装这一个 Skill**，即可同时获得：
 
-1. Dual-layer slide navigation (`#slide-N` hyperlinks)
-2. Defense-style speaker notes (`Q:` / `A:` pairs)
+1. **完整 ppt-master 能力**（生成 / 模板 / 填充 / 增强 → 原生可编辑 PPTX）
+2. **进阶答辩能力**（双层 `#slide-N` 导航 + `Q:`/`A:` 备注）
+
+安装后的目录形态（由 `install.sh` 组装）：
+
+```text
+~/.cursor/skills/ppt-defense/
+  SKILL.md                 ← Cursor 只发现这一份
+  references/ …            ← 答辩规范
+  scripts/inject_*.py      ← 答辩工具
+  ppt-master/              ← 内嵌的完整上游 skill（勿删）
+    SKILL.md
+    scripts/
+    workflows/
+    …
+```
+
+用户**不需要**再单独安装 `~/.cursor/skills/ppt-master`。
 
 ## Mandatory Load Order
 
 1. Read this file.
-2. Resolve **ppt-master** Skill root (directory that contains upstream `SKILL.md`
-   and `scripts/attribution_guard.py`). Prefer `~/.cursor/skills/ppt-master`.
-   If missing, stop and ask the user to install ppt-master.
-3. From the ppt-master root, run `python3 scripts/attribution_guard.py`.
+2. Resolve **bundled ppt-master root** (see next section).
+3. From that root, run `python3 scripts/attribution_guard.py`.
    Non-zero → stop (do not bypass).
-4. Read ppt-master [`SKILL.md`](../ppt-master/SKILL.md) + its selected generate
-   route (`workflows/generate-pptx.md` or the profile routing resolves).
-5. Read:
+4. Read bundled ppt-master `SKILL.md` and follow its routing
+   (`workflows/routing.md` → one generate/template/fill/enhance route).
+5. If the task is a **defense / interview / Q&A-hop** deck (default when the
+   user invoked PPT Defense or asked for dual-nav / 答辩备注), also read:
    - [`references/dual-nav.md`](references/dual-nav.md)
    - [`references/defense-notes.md`](references/defense-notes.md)
+6. Ordinary marketing / courseware requests: run ppt-master only; dual-nav is
+   optional unless the user asks for it.
+
+## Resolve Bundled ppt-master
+
+Let `DEFENSE_ROOT` = directory containing **this** `SKILL.md`.
+
+Search in order; use the first hit that contains both `SKILL.md` and
+`scripts/attribution_guard.py`:
+
+1. `DEFENSE_ROOT/ppt-master/`     ← **preferred (single-install bundle)**
+2. `DEFENSE_ROOT/../ppt-master/`  ← monorepo checkout (`skills/ppt-master`)
+3. `~/.cursor/skills/ppt-master/` ← legacy separate install (compat only)
+
+If none exist: tell the user to run `install.sh` from this repo (or re-run the
+Agent install prompt). **Do not** ask them to install a second skill by name.
 
 ## When To Use
 
-| Trigger | Action |
+| User intent | Behavior |
 |---|---|
-| 答辩 / 面试项目介绍 / 质询翻页 | Use this skill + ppt-master generate |
-| Ordinary marketing / courseware deck | Use ppt-master only (no dual-nav mandate) |
-| User already has `svg_output/` and only wants nav | Inject / refresh nav via `scripts/inject_dual_nav.py` |
+| 装了 PPT Defense，要做任意 PPT | Use bundled ppt-master routes |
+| 答辩 / 面试 / 质询翻页 | ppt-master generate **+** dual-nav **+** Q/A notes |
+| 只要刷新导航 | `scripts/inject_dual_nav.py` |
+| 用户说「只要 ppt-master」 | Still use this bundle’s nested `ppt-master/` |
 
-## Dual-Nav Contract (summary)
+## Defense Expansion (summary)
 
-- **Primary bar**: chapter labels → jump to each chapter’s **first** page.
-- **Secondary bar**: only when the active chapter has **≥ 2** pages; equal-width
-  slots; teal/active vs muted inactive.
-- Links must be exact `#slide-N` (1-based). ppt-master export turns these into
-  native slide jumps.
-- Keep a single source of truth: project file `nav_map.json` (see
-  [`examples/nav_map.example.json`](examples/nav_map.example.json)).
+- **Primary bar**: chapters → first page of chapter
+- **Secondary bar**: only if chapter has ≥2 pages
+- Links: exact `#slide-N`
+- Source of truth: project `nav_map.json`
+- Notes: `Q:` line, `A:` line, blank line between pairs
 
-Full rules: [`references/dual-nav.md`](references/dual-nav.md).
+Full rules: [`references/dual-nav.md`](references/dual-nav.md),
+[`references/defense-notes.md`](references/defense-notes.md).
 
-## Defense Notes Contract (summary)
+## Execution Checklist (defense decks)
 
-- One notes file per slide under `notes/`, plus optional `notes/total.md`.
-- Each pair: line `Q: …` then line `A: …`, blank line between pairs.
-- No invented metrics; mark unverifiable claims as gaps.
-- Format notes for **spoken** rebuttal, not bullet dumps.
+1. Confirm defense / interview scope (or enable dual-nav explicitly).
+2. Write / update `nav_map.json`.
+3. Generate or edit SVGs via **bundled** ppt-master workflow; keep `<g id="nav">`.
+4. Write `Q:`/`A:` notes; split `total.md` with ppt-master `total_md_split.py` if used.
+5. Export via bundled scripts: `finalize_svg` → `svg_quality_checker --stage final`
+   → `svg_to_pptx` (**另存** timestamped file).
+6. Smoke-test chapter jump + notes pane.
 
-Full rules: [`references/defense-notes.md`](references/defense-notes.md).
-
-## Execution Checklist
-
-1. **Scope** — Confirm defense deck (not generic ppt-master beautify).
-2. **Chapter map** — Write / update `nav_map.json` before drawing pages.
-3. **Generate or edit SVGs** via ppt-master workflow; every content page includes
-   the nav `<g id="nav">` from the map (use `inject_dual_nav.py` to refresh).
-4. **Notes** — Write `Q:`/`A:` pairs per page; split `total.md` with ppt-master
-   `total_md_split.py` when used.
-5. **Export** — ppt-master `finalize_svg` → `svg_quality_checker --stage final`
-   → `svg_to_pptx` (**另存** timestamped export; do not overwrite user edits).
-6. **Smoke test** — In PowerPoint: click primary chapter → secondary page; open
-   notes pane and spot-check one hard Q&A.
-
-## Scripts
+## Scripts (defense layer)
 
 | Script | Purpose |
 |---|---|
-| `scripts/inject_dual_nav.py` | Rewrite `<g id="nav">…</g>` on all `P*.svg` / `*.svg` from `nav_map.json` |
-| `scripts/validate_nav_map.py` | Validate map targets, chapter coverage, secondary rules |
+| `install.sh` | Assemble single Cursor skill folder with nested ppt-master |
+| `scripts/validate_nav_map.py` | Validate `nav_map.json` |
+| `scripts/inject_dual_nav.py` | Inject / refresh `<g id="nav">` |
 
 ```bash
+# from repo (skills/ppt-defense or repo root — see install.sh -h)
+./skills/ppt-defense/install.sh
+
 python3 ~/.cursor/skills/ppt-defense/scripts/validate_nav_map.py /path/to/project
 python3 ~/.cursor/skills/ppt-defense/scripts/inject_dual_nav.py /path/to/project
 ```
 
+All **ppt-master** CLIs live under:
+
+```bash
+python3 ~/.cursor/skills/ppt-defense/ppt-master/scripts/<name>.py …
+```
+
 ## Relationship To Upstream
 
-- Do **not** strip ppt-master attribution, LICENSE, or `attribution_guard`.
-- Prefer additive files under `skills/ppt-defense/` in the fork; avoid editing
-  upstream runtime unless contributing a PR back.
-- This skill may live at `~/.cursor/skills/ppt-defense` for Cursor discovery
-  while the fork branch hosts the same tree for versioning.
+- Nested `ppt-master/` remains the official attribution bundle (LICENSE,
+  SPONSORS placeholders, `attribution_guard`) — do not strip it.
+- This skill is an **expansion pack**: one Cursor install surface, two capability
+  layers.
+- Fork docs: omit upstream sponsor marketing; keep MIT + upstream credit.
