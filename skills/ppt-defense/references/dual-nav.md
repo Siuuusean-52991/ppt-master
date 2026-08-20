@@ -1,5 +1,14 @@
 # Dual-layer navigation (PPT Defense)
 
+## Default policy
+
+**ON by default** for every deck generated through PPT Defense.
+
+- Add dual-nav unless the user explicitly says not to
+  (e.g.「不要导航栏」「去掉顶栏」「no navigation」「without nav bar」).
+- Do not treat “marketing deck” / “普通 PPT” as an implicit opt-out.
+- If nav was on and the user only edits content, keep or refresh nav.
+
 ## Goal
 
 Let the speaker answer **interrupt questions** by jumping to the right chapter
