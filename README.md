@@ -38,9 +38,9 @@ Drop materials into chat, then:
 Use PPT Defense to build a PPT from my materials.
 
 I only installed PPT Defense — use its nested ppt-master engine.
-If this is for an interview/defense: add dual-layer #slide-N navigation and
-Q:/A: speaker notes. Export a native editable .pptx.
-Don’t invent unverifiable metrics.
+Dual-layer #slide-N navigation is ON by default (only skip if I explicitly
+say “no nav bar” / 「不要导航栏」). For interview/defense also add Q:/A: notes.
+Export a native editable .pptx. Don’t invent unverifiable metrics.
 ```
 
 ---
