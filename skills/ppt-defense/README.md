@@ -3,41 +3,46 @@
 Overlay skill for **答辩 / 面试 / 质询** PowerPoint decks, built on
 [PPT Master](https://github.com/hugohe3/ppt-master) (MIT).
 
-## What it adds
+## Foolproof use (copy-paste)
 
-1. **Dual-layer navigation** — chapter bar + in-chapter sub-bar with `#slide-N`
-   jumps for rapid Q&A hopping
-2. **Defense notes** — speaker notes as `Q:` / `A:` rebuttal pairs
-3. Helpers — `nav_map.json` validation + SVG nav injection
-
-## Install (Cursor)
-
-Copy or symlink this directory to:
+### 1) Ask your Agent to install
 
 ```text
-~/.cursor/skills/ppt-defense
+Please search GitHub for “PPT Defense” (Siuuusean-52991/ppt-master, branch
+feat/ppt-defense) and install ~/.cursor/skills/ppt-master plus
+~/.cursor/skills/ppt-defense for me. Confirm attribution_guard passes.
 ```
 
-Keep upstream PPT Master installed at `~/.cursor/skills/ppt-master` (required).
+### 2) Drop materials, then generate
 
-## Quick use
+```text
+Use PPT Defense to generate an interview/defense PPT from my materials:
+dual-layer #slide-N navigation, Q:/A: speaker notes, native .pptx via ppt-master.
+Don’t invent unverifiable numbers.
+```
 
-1. Build the deck with **ppt-master** as usual.
-2. Add `nav_map.json` to the project (see `examples/nav_map.example.json`).
-3. Inject nav into SVGs:
+中文版同样文案见仓库根目录 [`README_CN.md`](../../README_CN.md)。
+
+## What it adds
+
+1. **Dual-layer navigation** — chapter bar + in-chapter sub-bar (`#slide-N`)
+2. **Defense notes** — `Q:` / `A:` rebuttal pairs in speaker notes
+3. Helpers — `nav_map.json` validate + SVG nav injection
+
+## Manual install
+
+```bash
+# from this repo (branch feat/ppt-defense)
+cp -R skills/ppt-defense ~/.cursor/skills/ppt-defense
+# ppt-master must also exist at ~/.cursor/skills/ppt-master
+```
 
 ```bash
 python3 skills/ppt-defense/scripts/validate_nav_map.py /path/to/project
 python3 skills/ppt-defense/scripts/inject_dual_nav.py /path/to/project
 ```
 
-4. Write `notes/` with `Q:` / `A:` pairs; export via ppt-master `svg_to_pptx`.
-
 ## Attribution
 
 - Base workflow / runtime: © Hugo He — [ppt-master](https://github.com/hugohe3/ppt-master)
-- PPT Defense overlay: additive skill on this fork branch `feat/ppt-defense`
-
-## Docs note
-
-This fork’s root README omits upstream sponsor blocks and maintainer personal bio. See `docs/FORK.md` on branch `feat/ppt-defense`.
+- PPT Defense overlay: `skills/ppt-defense/` on branch `feat/ppt-defense`
