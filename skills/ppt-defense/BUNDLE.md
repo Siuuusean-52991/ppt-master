@@ -3,7 +3,7 @@
 PPT Defense is an **expansion pack**: one Cursor skill install unlocks
 
 1. Full upstream **ppt-master** (nested at `ppt-master/`)
-2. Defense features (dual-nav + `Q:`/`A:` notes)
+2. Defense features (dual-nav **default ON** + `Q:`/`A:` notes; opt-out only if user says no nav)
 
 ## Source layout (git)
 
