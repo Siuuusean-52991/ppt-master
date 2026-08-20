@@ -16,7 +16,8 @@ a nested ppt-master/. Do NOT install a separate ppt-master skill.
 
 ```text
 Use PPT Defense (nested ppt-master) to generate a PPT from my materials.
-For interview/defense: dual-layer #slide-N nav + Q:/A: notes. Native .pptx.
+Dual-layer #slide-N nav is ON by default (say “不要导航栏” only if you want it off).
+For interview/defense also add Q:/A: notes. Native .pptx.
 ```
 
 ## Layout after install
