@@ -1,0 +1,63 @@
+{
+  "total_pages": 21,
+  "primary": [
+    {"id": "intro", "label": "介绍", "first_page": 1},
+    {"id": "open", "label": "开场", "first_page": 2},
+    {"id": "overview", "label": "总览", "first_page": 4},
+    {"id": "tour", "label": "导览", "first_page": 6},
+    {"id": "eval", "label": "评测", "first_page": 8},
+    {"id": "badcase", "label": "Badcase", "first_page": 11},
+    {"id": "inspect", "label": "巡检", "first_page": 15},
+    {"id": "agent", "label": "Agent", "first_page": 18},
+    {"id": "hw", "label": "硬件", "first_page": 20},
+    {"id": "close", "label": "收束", "first_page": 21}
+  ],
+  "chapters": {
+    "intro": {"pages": [1], "secondary_labels": []},
+    "open": {"pages": [2, 3], "secondary_labels": ["结论", "议程"]},
+    "overview": {"pages": [4, 5], "secondary_labels": ["地图", "职责"]},
+    "tour": {"pages": [6, 7], "secondary_labels": ["中关村", "展厅"]},
+    "eval": {"pages": [8, 9, 10], "secondary_labels": ["评测集", "用例", "判分"]},
+    "badcase": {"pages": [11, 12, 13, 14], "secondary_labels": ["归因", "回流", "迭代", "仿真"]},
+    "inspect": {"pages": [15, 16, 17], "secondary_labels": ["总览", "12项", "标准"]},
+    "agent": {"pages": [18, 19], "secondary_labels": ["PilotDeck", "EdgeClaw"]},
+    "hw": {"pages": [20], "secondary_labels": []},
+    "close": {"pages": [21], "secondary_labels": []}
+  },
+  "page_chapter": {
+    "1": "intro",
+    "2": "open",
+    "3": "open",
+    "4": "overview",
+    "5": "overview",
+    "6": "tour",
+    "7": "tour",
+    "8": "eval",
+    "9": "eval",
+    "10": "eval",
+    "11": "badcase",
+    "12": "badcase",
+    "13": "badcase",
+    "14": "badcase",
+    "15": "inspect",
+    "16": "inspect",
+    "17": "inspect",
+    "18": "agent",
+    "19": "agent",
+    "20": "hw",
+    "21": "close"
+  },
+  "colors": {
+    "bar": "#0F2747",
+    "primary_active": "#2F6FED",
+    "primary_text": "#D7E2F0",
+    "primary_text_active": "#FFFFFF",
+    "secondary_active": "#0D9488",
+    "secondary_idle": "#152A45",
+    "secondary_text": "#B8C9DC",
+    "secondary_text_active": "#FFFFFF",
+    "divider": "#1B3A5C",
+    "page_chip": "#9EB0C5"
+  },
+  "font_family": "PingFang SC, Inter, Microsoft YaHei, Arial, sans-serif"
+}
