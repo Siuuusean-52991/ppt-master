@@ -13,6 +13,12 @@ This repository (`Siuuusean-52991/ppt-master`) is a fork of
 
 - `skills/ppt-defense/` — dual-nav + defense notes overlay skill
 
+## Restored in fork-facing docs
+
+- Upstream **product positioning** and route table (generate / template / fill / enhance)
+- Links to upstream deep docs (`why-ppt-master`, getting-started, SVG mapping)
+- Foolproof two-step Agent copy-paste tutorial for PPT Defense
+
 ## Omitted from fork-facing docs
 
 - Sponsor / affiliate blocks in README
